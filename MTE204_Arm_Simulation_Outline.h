@@ -1,4 +1,5 @@
 //RELEVANT NOTATION FROM THE DOCUMENT THAT WE SHOULD USE IN CODE
+//Information on the jacobian mathod can be found here: https://www.math.ucsd.edu/~sbuss/ResearchWeb/ikmethods/iksurvey.pdf
 {
 
 {t} = target positions of the end effectors, we only have 1, so this is not a vector
