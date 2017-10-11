@@ -1,5 +1,5 @@
 
-function P = Jacobian(q)
+function J = Jacobian(q)
 
 q = [0 0 0];
 
