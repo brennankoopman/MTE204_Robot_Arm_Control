@@ -20,7 +20,7 @@ for i = 1:1:100 % runs the jacobian method 30 times
 		e = 0.25*e/norm(e);
 	end
 %}
-	norm(e) % gets the distance from the target (remove semicolon to print value)
+	norm(e); % gets the distance from the target (remove semicolon to print value)
 
 	J = Jacobian(q); % gets the partial derivatives of end effector co-ords wrt the angles
 	JT = transpose(J); % gets the transpose to slightly reduce calc time by using more memory
@@ -33,7 +33,7 @@ for i = 1:1:100 % runs the jacobian method 30 times
 
 	q = q + deltaQ; % moves the joints towards the goal
 
-	s = armFunction(q, [0;0;0]) % gets the new position after the movement
+	s = armFunction(q, [0;0;0]); % gets the new position after the movement
 
 	M = [M;transpose(s)];
 endfor
