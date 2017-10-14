@@ -1,6 +1,6 @@
 % calculates the jacobian based on the joint angles
 
-function J = Jacobian(q)
+function J = Jacobian(q);
 
 len = [0 1 1];
 
