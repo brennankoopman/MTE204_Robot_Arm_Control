@@ -1,18 +1,18 @@
-%clc;
+% Moves the end effector to the 
 
-more off;
+more off; % allows lots of output to the command window without having to press f
 
-q = [0;90;0]; % in degrees
+q = [0;0;0]; % in degrees
 
 q = q*(pi/180); % now in radians
 initialQ = q; % stores the initial value of where the arm is
 
 s = armFunction(q, [0;0;0]); % function gets the end effector
-t = [0;0;1.9] % the goal of where the end effector must be
+t = [1.7;0;0.3]; % the goal of where the end effector must be
 
 M = transpose(s);
 e = t - s;
-for i = 1:1:100 % runs the jacobian method 30 times
+for i = 1:1:30 % runs the jacobian method 30 times
 
 	e = t - s; % recalculates the direction that the arm is supposed to move towards
 %{
@@ -20,8 +20,8 @@ for i = 1:1:100 % runs the jacobian method 30 times
 		e = 0.25*e/norm(e);
 	end
 %}
-	norm(e)
-	
+	norm(e); % gets the distance from the target (remove semicolon to print value)
+
 	J = Jacobian(q); % gets the partial derivatives of end effector co-ords wrt the angles
 	JT = transpose(J); % gets the transpose to slightly reduce calc time by using more memory
 
@@ -39,7 +39,7 @@ for i = 1:1:100 % runs the jacobian method 30 times
 end
 
 %csvwrite('stuff.csv', M);
-
+% Plots the path of the end effector
 plot3(M(:,1),M(:,2),M(:,3));
 
 xlim([-2 2]);
