@@ -8,7 +8,7 @@ q = q*(pi/180); % now in radians
 initialQ = q; % stores the initial value of where the arm is
 
 s = armFunction(q, [0;0;0]); % function gets the end effector
-t = [1;1;1]; % the goal of where the end effector must be
+t = [1.2;0.4;0.1]; % the goal of where the end effector must be
 
 M = transpose(s);
 e = t - s;
@@ -45,6 +45,9 @@ plot3(M(:,1),M(:,2),M(:,3));
 xlim([-2 2]);
 ylim([-2 2]);
 zlim([-2 2]);
+xlabel ("x");
+ylabel ("y");
+zlabel ("Z");
 
 finalQ = q;
 
