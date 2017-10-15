@@ -2,17 +2,17 @@
 
 more off; % allows lots of output to the command window without having to press f
 
-q = [0;0;0]; % in degrees
+q = [0;0;90]; % in degrees
 
 q = q*(pi/180); % now in radians
 initialQ = q; % stores the initial value of where the arm is
 
 s = armFunction(q, [0;0;0]); % function gets the end effector
-t = [1.7;0;0.3]; % the goal of where the end effector must be
+t = [1;1;1]; % the goal of where the end effector must be
 
 M = transpose(s);
 e = t - s;
-for i = 1:1:30 % runs the jacobian method 30 times
+for i = 1:1:100 % runs the jacobian method 30 times
 
 	e = t - s; % recalculates the direction that the arm is supposed to move towards
 %{
@@ -27,16 +27,16 @@ for i = 1:1:30 % runs the jacobian method 30 times
 
 	jjte = J*JT*e; % again reduces calc time
 
-	a = dot(e,jjte)/dot(jjte,jjte); % gets the amount of movement towards the goal using the Jacobian
+	a = (dot(e,jjte))/(dot(jjte,jjte)); % gets the amount of movement towards the goal using the Jacobian
 
-	deltaQ = a*J*JT*e; % calcualtes the amount to move the joints towards the goal
+	deltaQ = a*JT*e; % calcualtes the amount to move the joints towards the goal
 
 	q = q + deltaQ; % moves the joints towards the goal
 
 	s = armFunction(q, [0;0;0]); % gets the new position after the movement
 
 	M = [M;transpose(s)];
-end
+endfor
 
 %csvwrite('stuff.csv', M);
 % Plots the path of the end effector
