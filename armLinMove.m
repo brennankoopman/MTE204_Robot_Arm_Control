@@ -13,7 +13,7 @@ function sNew = armLinMove(t, qi)
   
   %assuming our scale is in meters, then lets start with movement every 2.5 cm
   %n is the number of subcuts we have per movment
-  n = round( norm(e) / 0.6 );
+  n = round( norm(e) / 0.2 );
   %n=1;
   eN = e / n;
   

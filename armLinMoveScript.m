@@ -1,7 +1,7 @@
-
+more off;
 q = [180;0;90];
 q = q*(pi/180);
-t = [1;2;1];
+t = [0;1;1];
 
 Q = [q];    %list of all angles for each target point starting at the initial position
 
@@ -18,13 +18,13 @@ n = size(Points,2);
  
  cPoints = [Points(:,1)] %list of points, with 100 points for each arc, ie target point, here we just set the first entry the initial position
   
-  for a = 1:n                       %for each jump in angles
+  for a = 1:n-1                      %for each jump in angles
     
     dQ = Q(:,a+1) - Q(:,a) ;         %finds the change in angle needed for this step
-    dq = dQ/100;                 %these are the incremental changes to q to show that the end effector does not move linearly
+    dq = dQ/10;                 %these are the incremental changes to q to show that the end effector does not move linearly
    
     
-    for b = 1:100                    %find 100 points on the arc
+    for b = 1:10                    %find 100 points on the arc
       nu = armFunction( ( Q(:,a) + b*dq) , [0;0;0] );
       cPoints = [cPoints, nu];
     end
