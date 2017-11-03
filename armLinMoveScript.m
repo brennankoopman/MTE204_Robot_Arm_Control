@@ -1,14 +1,15 @@
 more off;
-q = [180;0;90];
+q = [0;0;-45];
 q = q*(pi/180);
-t = [0;1;1];
+t = [-1.6;0.3;-0.3];
 
 Q = [q];    %list of all angles for each target point starting at the initial position
 
-Points = armLinMove(t,q)
+n=1;
+Points = armLinMove(t,q,n)
 
 
-n = size(Points,2);
+n = n+1;
 
   %CALCULATES THE ANGLES FOR EACH TARGET POINT USING THE JACOBIAN METHOD
   for a = 1:n-1
@@ -21,10 +22,25 @@ n = size(Points,2);
   for a = 1:n-1                      %for each jump in angles
     
     dQ = Q(:,a+1) - Q(:,a) ;         %finds the change in angle needed for this step
-    dq = dQ/10;                 %these are the incremental changes to q to show that the end effector does not move linearly
+    
+    
+    if( abs(dQ(1)) > pi ) 
+      dQ(1) = -sign(dQ(1))*2*pi + dQ(1);
+    end
+    
+    if( abs(dQ(2)) > pi ) 
+      dQ(2) = -sign(dQ(2))*2*pi + dQ(2);
+    end
+    
+    if( abs(dQ(3)) > pi ) 
+      dQ(3) = -sign(dQ(2))*2*pi + dQ(3);
+    end
+    
+    
+    dq = dQ/30;                 %these are the incremental changes to q to show that the end effector does not move linearly
    
     
-    for b = 1:10                    %find 100 points on the arc
+    for b = 1:30                    %find 100 points on the arc
       nu = armFunction( ( Q(:,a) + b*dq) , [0;0;0] );
       cPoints = [cPoints, nu];
     end
