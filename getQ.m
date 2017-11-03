@@ -1,5 +1,5 @@
 % uses the Jacobian transpose method to get the joint angles q that bring the end effector within error distance of target
-
+%q is a collumn vector
 function[q] = getQ(target, initialQ, err)
 
 q = initialQ;
@@ -11,7 +11,7 @@ e = t - s;
 
 i = 0;
 
-while(i < 2000 && norm(e) > err) % runs the jacobian method 200 times
+while(i < 200 && norm(e) > err) % runs the jacobian method 200 times
 	i = i+1;
 	
 	% recalculates the direction that the arm is supposed to move towards
