@@ -5,14 +5,15 @@ efficient number of smaller steps in order to make the path as straight as
 possible
 %}
 
-%t is the target position, q is the initial position given in is angles
+%t is the target position, qi is the initial position given angles
 %sNew is a list of new positions to be outputted to the CSV file
-function sNew = armLinMove(t, qi, n)
-  s = armFunction( qi, [0;0;0])
+function sNew = armLinMove(t, qi)
+  s = armFunction( qi, [0;0;0]);
   e = t - s;
   
   %assuming our scale is in meters, then lets start with movement every 2.5 cm
   %n is the number of subcuts we have per movment
+  n = ceil( norm(e) / 0.5 );
   %n=1;
   eN = e / n;
   
