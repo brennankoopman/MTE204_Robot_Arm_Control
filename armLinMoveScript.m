@@ -1,11 +1,11 @@
 more off;
-q = [0;0;-45];
+q = [0;-160;-45];
 q = q*(pi/180);
-t = [-1.6;0.3;-0.3];
+t = [-1.6;0.8;-0.3];
 
 Q = [q];    %list of all angles for each target point starting at the initial position
 
-n=1;
+n=3;
 Points = armLinMove(t,q,n)
 
 
@@ -48,17 +48,19 @@ n = n+1;
   end
   %cPoints
 
-plot3(cPoints(1,:),cPoints(2,:),cPoints(3,:),'r'); %plotting the endpoint between each point
+plot3(cPoints(1,:),cPoints(2,:),cPoints(3,:),'r','DisplayName',sprintf('Linear Rotation of Joints'),'linewidth',3); %plotting the endpoint between each point
 
 hold on;  
-plot3(Points(1,:),Points(2,:),Points(3,:),'g');   %plotting the endpoint @ each target point
+plot3(Points(1,:),Points(2,:),Points(3,:),'g','DisplayName',sprintf('Ideal Path'),'linewidth',3);   %plotting the endpoint @ each target point
 
 xlim([-2 2]);
 ylim([-2 2]);
 zlim([-2 2]);
-xlabel ("x");
-ylabel ("y");
-zlabel ("Z");
+title (sprintf('Example of Linearization of Joint Angles Between Targets'), 'fontsize', 14);
+xlabel('X', 'fontsize', 14, 'fontweight', 'bold');
+ylabel('Y', 'fontsize', 14, 'fontweight', 'bold');
+zlabel('Z', 'fontsize', 14, 'fontweight', 'bold');
+lgd = legend('show', 'location', 'northwest'); 
 
 hold off;
 
