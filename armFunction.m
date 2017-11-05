@@ -1,5 +1,7 @@
+%this function calculates the postion of the end effector with the inputs of
+%q, which is the joints angles of the arm
+%P is the reference point of the arm in 3D space, typically (0,0,0)
 function s = armFunction(q, P)
-% rearranged to minimize W1,W2,W3 
 
 len = [0 1 1];
 x = (len(2)*cos(q(2)) + len(3)*cos(q(2)-q(3)))*cos(q(1)) - P(1); % x

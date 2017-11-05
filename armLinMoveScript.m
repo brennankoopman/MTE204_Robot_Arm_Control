@@ -1,22 +1,11 @@
 more off;
-<<<<<<< HEAD
 q = [0;-160;-45];
 q = q*(pi/180);
 t = [-1.6;0.8;-0.3];
 
 Q = [q];    %list of all angles for each target point starting at the initial position
-
 n=3;
-Points = armLinMove(t,q,n)
-=======
-q = [75;0;40];
-q = q*(pi/180);
-t = [0.2;-1;1.5];
-
-Q = [q];    %list of all angles for each target point starting at the initial position
-
-Points = armLinMove(t,q);
->>>>>>> 3caf687f2d45416f95f50100267080d79ae0f68d
+Points = sectionPath(t,q,n);
 
 
 n = size(Points,2);
@@ -59,20 +48,14 @@ n = size(Points,2);
     end
    
   end
-<<<<<<< HEAD
+
   %cPoints
 
 plot3(cPoints(1,:),cPoints(2,:),cPoints(3,:),'r','DisplayName',sprintf('Linear Rotation of Joints'),'linewidth',3); %plotting the endpoint between each point
 
 hold on;  
 plot3(Points(1,:),Points(2,:),Points(3,:),'g','DisplayName',sprintf('Ideal Path'),'linewidth',3);   %plotting the endpoint @ each target point
-=======
 
-hold on;
-plot3(cPoints(1,:),cPoints(2,:),cPoints(3,:),'r'); %plotting the true path between each point
- 
-plot3(Points(1,:),Points(2,:),Points(3,:),'g');   %plotting the desired path @ with each target point
->>>>>>> 3caf687f2d45416f95f50100267080d79ae0f68d
 
 xlim([-2 2]);
 ylim([-2 2]);
