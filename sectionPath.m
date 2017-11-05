@@ -7,9 +7,9 @@
   possible
 %}
 
-%t is the target position, q is the initial position given in is angles
+%t is the target position, q is the initial position given in its angles
 %n = number of steps
-%sNew is a list of new positions to be outputted to the CSV file
+%sNew is a list of new positions to be outputted
 function sNew = sectionPath(t, qi, n)
   s = armFunction( qi, [0;0;0]);
   e = t - s;
@@ -19,9 +19,10 @@ function sNew = sectionPath(t, qi, n)
  
   eN = e / n;
   
-  sNew = [s];         %set the first value to the initial position
+  sNew = [s,zeros(3, n)];         %set the first value to the initial position
+    
   for a = 1:n
-   sNew = [sNew, s + a*eN]; %the size of sNew is 3 x n+1  
+    sNew(:,a+1) = sNew(:,a) + eN; %the size of sNew is 3 x n+1
   end
     
 end

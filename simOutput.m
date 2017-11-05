@@ -14,10 +14,10 @@ Points = sectionPath(t,q,n);
 
   %CALCULATES THE ANGLES FOR EACH STEP POINT USING THE JACOBIAN TRANSPOSE METHOD
   for a = 1:n
-     Q(:,a+1) = getQ( Points(:,a+1), Q(:,a),Jerr); % ERROR of 1 mm 
+     Q(:,a+1) = getQ( Points(:,a+1), Q(:,a),Jerr); % ERROR of Jerr
   end
   
- dQ = [zeros(3,n)];
+ dQ = [zeros(3,n)];       %list of all differential angles
  cPoints = [Points(:,1)]; %list of points, with 100 points for each arc, ie target point, here we just set the first entry the initial position
  
   for a = 1:n                       %for each jump in angles
