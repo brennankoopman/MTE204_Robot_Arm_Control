@@ -1,10 +1,10 @@
 more off;
-q = [0;-160;-45];
+q = [0;-90;0];
 q = q*(pi/180);
-t = [-1.6;0.8;-0.3];
+t = [0;0;2];
 
 Q = [q];    %list of all angles for each target point starting at the initial position
-n=3;
+n=5;
 Points = sectionPath(t,q,n);
 
 
@@ -51,20 +51,34 @@ n = size(Points,2);
 
   %cPoints
 
-plot3(cPoints(1,:),cPoints(2,:),cPoints(3,:),'r','DisplayName',sprintf('Linear Rotation of Joints'),'linewidth',3); %plotting the endpoint between each point
+%plot3(cPoints(1,:),cPoints(2,:),cPoints(3,:),'r','DisplayName',sprintf('Linear Rotation of Joints'),'linewidth',3); %plotting the endpoint between each point
 
-hold on;  
-plot3(Points(1,:),Points(2,:),Points(3,:),'g','DisplayName',sprintf('Ideal Path'),'linewidth',3);   %plotting the endpoint @ each target point
+
+%scatter3(Points(1,:),Points(2,:),Points(3,:),'g','DisplayName',sprintf('Ideal Path'),'linewidth',3);   %plotting the endpoint @ each target point
+%hold on;
+%%plotting each interation of the arm
+%for i = [1:1:n]  
+%Arm = [ [0;0;0] , armFunction_midJoint(Q(:,i), [0;0;0]) , armFunction(Q(:,i),[0;0;0])];
+%plot3(Arm(1,:),Arm(2,:),Arm(3,:), 'c'); 
+%end 
+%
+%
+
+%title (sprintf('Example of Linearization of Joint Angles Between Targets'), 'fontsize', 14);
+%xlabel('X', 'fontsize', 14, 'fontweight', 'bold');
+%ylabel('Y', 'fontsize', 14, 'fontweight', 'bold');
+%zlabel('Z', 'fontsize', 14, 'fontweight', 'bold');
+%%lgd = legend('show', 'location', 'northwest'); 
+
+
+
+Arm = [ [0;0;0] , armFunction_midJoint(Q(:,2), [0;0;0]) , armFunction(Q(:,2),[0;0;0])];
+plot3(Arm(1,:),Arm(2,:),Arm(3,:), 'c'); 
 
 
 xlim([-2 2]);
 ylim([-2 2]);
 zlim([-2 2]);
-title (sprintf('Example of Linearization of Joint Angles Between Targets'), 'fontsize', 14);
-xlabel('X', 'fontsize', 14, 'fontweight', 'bold');
-ylabel('Y', 'fontsize', 14, 'fontweight', 'bold');
-zlabel('Z', 'fontsize', 14, 'fontweight', 'bold');
-lgd = legend('show', 'location', 'northwest'); 
 
 hold off;
 
