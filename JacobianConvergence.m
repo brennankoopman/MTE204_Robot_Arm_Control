@@ -17,6 +17,7 @@ t = [0;0;2]; % the goal of where the end effector must be
 M = transpose(s);
 e = t - s;
 Q = [q];
+
 for i = 1:1:iter % runs the jacobian method 30 times
 
 	
@@ -45,6 +46,8 @@ for i = 1:1:iter % runs the jacobian method 30 times
   
   e = t - s; % recalculates the direction that the arm is supposed to move towards
 endfor
+
+norm(e)
  
 
 
@@ -52,7 +55,7 @@ hold on;
 
 xlim([-2 2]);
 ylim([-2 2]);
-zlim([-2 2]);
+zlim([-2 2.5]);
 
 %plots the arm after each iteration
 for i = [1:1:iter]  
