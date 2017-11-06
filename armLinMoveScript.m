@@ -1,7 +1,7 @@
 more off;
-q = [0;-90;0];
+q = [10;0;20];
 q = q*(pi/180);
-t = [0;0;2];
+t = [.1;.2;1.8];
 
 Q = [q];    %list of all angles for each target point starting at the initial position
 n=5;
@@ -51,29 +51,25 @@ n = size(Points,2);
 
   %cPoints
 
-%plot3(cPoints(1,:),cPoints(2,:),cPoints(3,:),'r','DisplayName',sprintf('Linear Rotation of Joints'),'linewidth',3); %plotting the endpoint between each point
+plot3(cPoints(1,:),cPoints(2,:),cPoints(3,:),'r','DisplayName',sprintf('Linear Rotation of Joints'),'linewidth',3); %plotting the endpoint between each point
 
+hold on;
+scatter3(Points(1,:),Points(2,:),Points(3,:),'g','DisplayName',sprintf('Ideal Path'),'linewidth',3);   %plotting the endpoint @ each target point
 
-%scatter3(Points(1,:),Points(2,:),Points(3,:),'g','DisplayName',sprintf('Ideal Path'),'linewidth',3);   %plotting the endpoint @ each target point
-%hold on;
-%%plotting each interation of the arm
-%for i = [1:1:n]  
-%Arm = [ [0;0;0] , armFunction_midJoint(Q(:,i), [0;0;0]) , armFunction(Q(:,i),[0;0;0])];
-%plot3(Arm(1,:),Arm(2,:),Arm(3,:), 'c'); 
-%end 
-%
-%
-
-%title (sprintf('Example of Linearization of Joint Angles Between Targets'), 'fontsize', 14);
-%xlabel('X', 'fontsize', 14, 'fontweight', 'bold');
-%ylabel('Y', 'fontsize', 14, 'fontweight', 'bold');
-%zlabel('Z', 'fontsize', 14, 'fontweight', 'bold');
-%%lgd = legend('show', 'location', 'northwest'); 
+%plotting each iteration of the arm
+for i = [1:1:n]  
+Arm = [ [0;0;0] , armFunction_midJoint(Q(:,i), [0;0;0]) , armFunction(Q(:,i),[0;0;0])];
+plot3(Arm(1,:),Arm(2,:),Arm(3,:), 'bk', 'linewidth', 2); 
+end 
 
 
 
-Arm = [ [0;0;0] , armFunction_midJoint(Q(:,2), [0;0;0]) , armFunction(Q(:,2),[0;0;0])];
-plot3(Arm(1,:),Arm(2,:),Arm(3,:), 'c'); 
+title (sprintf('Example of Linearization of Joint Angles Between Targets'), 'fontsize', 14);
+xlabel('X', 'fontsize', 14, 'fontweight', 'bold');
+ylabel('Y', 'fontsize', 14, 'fontweight', 'bold');
+zlabel('Z', 'fontsize', 14, 'fontweight', 'bold');
+lgd = legend('show', 'location', 'northwest'); 
+
 
 
 xlim([-2 2]);

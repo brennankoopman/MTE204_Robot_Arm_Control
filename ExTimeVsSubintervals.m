@@ -3,7 +3,7 @@ q = [10;0;160];
 t = [0.3;-1.3;1.5];
 Jerr = 0.001; %testing a Jacobian endcase error
 
-exTime = zeros(1,51);
+exTime = zeros(1,21);
 NumberOfTrials = 3;
 
 for h = 1:NumberOfTrials 
