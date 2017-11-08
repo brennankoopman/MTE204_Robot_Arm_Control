@@ -71,7 +71,7 @@ Points = sectionPath(t,q,n); %points is a 3 x n+1 matrix
     
   end
  
- QdQP = [transpose(Q),transpose(dQ),transpose(Points)];
+ QdQP = [transpose(Q),transpose(dQ),transpose(Points)]; %process the matrices for output;
  
  
 
