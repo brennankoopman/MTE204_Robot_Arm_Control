@@ -1,10 +1,10 @@
 more off;
 q = [0;-160;-45];
 q = q*(pi/180);
-t = [-1.6;0.8;-0.3];
+t = [1.5;0.8;-0.3];
 
 Q = [q];    %list of all angles for each target point starting at the initial position
-n=3;
+n=12;
 Points = sectionPath(t,q,n);
 
 
