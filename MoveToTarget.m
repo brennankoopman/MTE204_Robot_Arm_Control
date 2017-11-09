@@ -10,7 +10,7 @@ q = q*(pi/180); % now in radians
 Q = [q];
 s = armFunction(q, [0;0;0]) % function gets the end effector
 init = s;
-t = [0;0;2]; % the goal of where the end effector must be
+t = [1;1;1]; % the goal of where the end effector must be
 
 M = transpose(s);
 e = t - s;
@@ -58,18 +58,21 @@ endfor
   zlabel('Z', 'fontsize', 14, 'fontweight', 'bold');
   lgd = legend('show', 'location', 'northwest'); 
 
-  for a = 1:5
+  for a = 1:8
     Arm = [P ,armFunction_midJoint(Q(:,a), [0;0;0]) , armFunction(Q(:,a),[0;0;0])];
     plot3(Arm(1,:),Arm(2,:),Arm(3,:), 'bk', 'linewidth',2);
   end
 
-%csvwrite('stuff.csv', M);
+csvwrite('stuff.csv', M);
 % Plots the path of the end effector
 hold off;
 
 finalQ = q;
 
 s = armFunction(q, [0;0;0]);
+
+e = t - s;
+norm(e)
 
 
 
