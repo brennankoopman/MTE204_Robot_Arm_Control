@@ -1,7 +1,9 @@
 
 %{
+%this times the numerical method verses n subintervals, the calculations in this function are the major ones a real 
+%time system would need to operate with our mething method
 q - the initial position in angles of deg
-t - the target position in cartesian coords, col vector
+t - the target position in cartesian coords, col vesctor
 Jerr - the end case error on the Jacobian transpose method
 n = number of steps you break the linear movement into
 

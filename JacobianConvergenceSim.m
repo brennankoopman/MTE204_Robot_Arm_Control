@@ -40,7 +40,7 @@ for i = 1:1:n % runs the jacobian method n times
 
 	M = [M;transpose(s)];   %convert the column vectors to row vectors for nicer outputs to a csv
 endfor
-  
+  %set up the parameters of the ideal linear path
   X = [init(1),t(1)];
   Y = [init(2),t(2)];
   Z = [init(3),t(3)];
@@ -48,7 +48,9 @@ endfor
   for a = 1:n
     Arm = [P ,armFunction_midJoint(Q(:,a), [0;0;0]) , armFunction(Q(:,a),[0;0;0])];
    
-    plot3(X,Y,Z, 'r','linewidth',3,'DisplayName',sprintf('Ideal Linear Path') );
+    %plot the ideal path
+    plot3(X,Y,Z, 'r','linewidth',3,'DisplayName',sprintf('Ideal Linear Path'),'marker','o' );
+    %set up the parameter for plotting
     hold on;
     xlim([-2 2]);
     ylim([-2 2]);
@@ -57,9 +59,11 @@ endfor
     xlabel('X', 'fontsize', 14, 'fontweight', 'bold');
     ylabel('Y', 'fontsize', 14, 'fontweight', 'bold');
     zlabel('Z', 'fontsize', 14, 'fontweight', 'bold');
+    %plot the current linear path of the Jacobian method
     plot3(M([1:a],1),M([1:a],2),M([1:a],3), 'c','linewidth',3,'DisplayName',sprintf('path of arm') );
+    %plot the current version of the arm
     plot3(Arm(1,:),Arm(2,:),Arm(3,:), 'bk', 'linewidth',2);
-    %lgd = legend('show', 'location', 'northwest');
+    lgd = legend('show', 'location', 'northwest');
     pause(0.2);
     hold off;
   end

@@ -1,32 +1,35 @@
 # MTE204_Robot_Arm_Control
-This is a numerical methods project, testing both the Jacobian transpose and Inverse Method as they apply to robot arm pathing and control
+This is a numerical methods project, testing both the Jacobian transpose Method as they apply to robot arm pathing and control
 
-The Major organization of the following files is as follows (11/5/2017)
+The Major organization of the following files is as follows (11/9/2017)
 
---------------------------------------------------
-Code implementing the Jacobian transpose method:
---------------------------------------------------
+------------------------------------------------------------------
+Code implementing the Jacobian transpose method and model of robot:
+-------------------------------------------------------------------
 Jacoiban.m 		~ calcualte Jac of the robot system
 getQ.m			~ implements the jacobian Transpose method, and returns the joint angles for the target position
 armFunction.m		~ calculates the position of the end effector based on inputted the current joint angles, used to evaluate error
-armFunction_midJjoint.m	~ calculates the position of the midjoint of the arm based on q1 and q3
+armFunction_midJjoint.m	~ calculates the position of the midjoint of the arm based on q1 q2 q3
+JacobianConvergence.m	~ prints out the end effector at each iteration of the tranpose method, to test the convergence
+JacobianConergenceSim.m	~ simulation of the above, looks nicer, and can see the continuous effect 
 
-armSim.m 		~ just a test
-MoveToTarget.m		~ used to evaluate the convergence of the transpose method and visualize the arm before the simulation
 
 --------------------------------------------------
 Code Implementing linear pathing
 --------------------------------------------------
-armLinMove.m		~almost identical to sectionPath, but has one les parameter, used to section a linear path into a list of subTargets on that path
-armLinMoveScript.m	~uses armLinMove.m and outputs a graph of the true and actual paths of the robot
+Pathing.m		~ Plots the linear path, and conpares it to the linearization of the joint angles, resulting in arcs
+PathingSim.m		~ Simmulates the above but ALSO has user input to find the optimal number of subintervals based on our analysis
+sectionPath.m 		~ section a given linear path into n subintervals and returns all the target points
 
 
 --------------------------------------------------
-Analysis of Jacobian tranpose method
+Analysis of time computation
 --------------------------------------------------
-sectionPath.m 		~almsot identical to armLinMove, but sections based a number of subintervals, instead of a fixed length
-ExTimeVsSubintervals.m	~similair to linArmMoveScript but doesnt have code for graphoutputs, and visualization to accurately evaluate the time complexity of the algorithm
+ExTimeVsSubintervals.m	~ uses timoutputtest.m to calcuate the time for each subinterval value.
+TimeOutputTest.m	~ similair to Pathing but doesnt have code for graph outputs, and visualization to accurately evaluate the time complexity of the algorithm 
+
 
 --------------------------------------------------
-Final applicable Function
+Final most applicable Function
 --------------------------------------------------
+PathingSim.m
