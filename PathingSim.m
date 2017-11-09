@@ -13,9 +13,9 @@ arcIter = number of points you take on the arc
 q = [0;-160;-45];
 t = [1.5;0.8;-0.3];
 Jerr = 0.001;     %a jacobian absiolute error of 1 mm
-Emax = 0.9;      %absolute worst positional error of 1 cm
+Emax = 1;      %absolute worst positional error of 1 cm
 exTime = 15;       %worst case computation time in seconds
-arcIter = 6;
+arcIter = 4;
 q = q*(pi/180);     %convert q to radians
 P = [0;0;0];
 
@@ -118,7 +118,7 @@ Points = sectionPath(t,q,n); %points is a 3 x n+1 matrix, it will track the idea
     xlim([-2 2]);
     ylim([-2 2]);
     zlim([-2 2]);
-    view(160,20);
+    view(-180+0.5*c,20);
     xlabel('X', 'fontsize', 14, 'fontweight', 'bold');
     ylabel('Y', 'fontsize', 14, 'fontweight', 'bold');
     zlabel('Z', 'fontsize', 14, 'fontweight', 'bold');
