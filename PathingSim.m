@@ -2,23 +2,20 @@
 %{
 q - the initial position in angles of deg
 t - the target position in cartesian coords, col vector
-Jerr - the end case error on the Jacobian transpose method
+Jerr - the end case precision on the Jacobian transpose method
 n = number of steps you break the linear movement into
 Emax = the max positonal error in the end effector
 CompTime = the worst case computation time of the algorithm
 arcIter = number of points you take on the arc
 %}
 
+%User inputs based on client's required path, and restrictions
 q = [0;-160;-45];
 t = [1.5;0.8;-0.3];
 Jerr = 0.001; %a jacobian absiolute error of 1 mm
 Emax = 0.05;   %absolute worst positional error of 1 cm
 exTime = 6; %worst case computation time in seconds
 arcIter = 10;
- 
-
-%I need something here to validate the position of the arm, because it cannot fully stretch out
-
 q = q*(pi/180);     %convert q to radians
 
 
@@ -67,16 +64,16 @@ Points = sectionPath(t,q,n); %points is a 3 x n+1 matrix, it will track the idea
     % NOT -340, thus a single dq value cannot exceed 180 deg, as the smaller 
     % rotation value is preffered. note that angles are in RADIANS
     
-    if( abs(dQ(1,a))>pi) 
-     dQ(1,a)= dQ(1,a)-2*pi*sign(dQ(1,a));  %takes the opposite of the sign of your dQ * 360, and adds your dQ to find your opposite rotation
+    if( abs(dQ(1))>pi) 
+     dQ(1)= dQ(1)-2*pi*sign(dQ(1));  %takes the opposite of the sign of your dQ * 360, and adds your dQ to find your opposite rotation
     end
     
-    if( abs(dQ(2,a))>pi) 
-     dQ(2,a) = dQ(2,a)-2*pi*sign(dQ(2,a)); 
+    if( abs(dQ(2))>pi) 
+     dQ(2) = dQ(2)-2*pi*sign(dQ(2)); 
     end 
     
-    if( abs(dQ(3,a))>pi) 
-     dQ(3,a) = dQ(3,a)-2*pi*sign(dQ(3,a));  
+    if( abs(dQ(3))>pi) 
+     dQ(3) = dQ(3)-2*pi*sign(dQ(3));  
     end
     
     dq = dQ/arcIter;                     %these are the incremental changes to q to show that the end effector does not move linearly
@@ -89,7 +86,7 @@ Points = sectionPath(t,q,n); %points is a 3 x n+1 matrix, it will track the idea
     
   end
  
- QdQP = [transpose(Q),transpose(dQ),transpose(Points)]; %process the matrices for output;
+  
  
  
 
