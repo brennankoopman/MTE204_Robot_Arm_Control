@@ -42,7 +42,7 @@ n = size(Points,2);
     dq = dQ/40;                     %these are the incremental changes to q to show that the end effector does not move linearly
    
     
-    for b = 1:40                   %find 100 points on the arc
+    for b = 1:40                   %find 40 points on the arc
       nu = armFunction( ( Q(:,a) + b*dq) , [0;0;0] );
       cPoints = [cPoints, nu];
     end
@@ -50,6 +50,12 @@ n = size(Points,2);
   end
 
   %cPoints
+  
+  %I am trying to make a mock animation using continuously updating graph outputs
+  %I want to use the pause funciton to delay each output_max_field_width
+  %scale the pause rate based on distance of travel.
+  %I want to continuously print the the ideal path, and each arm for each of the points on the arc
+  
 
 plot3(cPoints(1,:),cPoints(2,:),cPoints(3,:),'r','DisplayName',sprintf('Linear Rotation of Joints'),'linewidth',3); %plotting the endpoint between each point
 
