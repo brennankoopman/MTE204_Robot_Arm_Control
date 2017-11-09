@@ -2,18 +2,21 @@
 
 more off; % allows lots of output to the command window without having to press f
 P = [0;0;0];
-qi = [0;0;0]*(pi/180);
 q = [0;0;0]; % in degrees
+n = 200;
 
 q = q*(pi/180); % now in radians
-initialQ = q; % stores the initial value of where the arm is
 
+Q = [q];
 s = armFunction(q, [0;0;0]) % function gets the end effector
-t = [2;1;-2]; % the goal of where the end effector must be
+init = s;
+t = [0;0;2]; % the goal of where the end effector must be
 
 M = transpose(s);
 e = t - s;
-for i = 1:1:100 % runs the jacobian method 30 times
+
+
+for i = 1:1:n % runs the jacobian method 30 times
 
 	e = t - s; % recalculates the direction that the arm is supposed to move towards
 %{
@@ -33,29 +36,35 @@ for i = 1:1:100 % runs the jacobian method 30 times
 	deltaQ = a*JT*e; % calcualtes the amount to move the joints towards the goal
 
 	q = q + deltaQ; % moves the joints towards the goal
+  Q = [Q,q];
 
 	s = armFunction(q, [0;0;0]); % gets the new position after the movement
 
 	M = [M;transpose(s)];   %convert the column vectors to row vectors for nicer outputs to a csv
 endfor
   
- initArm = [P ,armFunction_midJoint(qi, [0;0;0]) , armFunction(qi,[0;0;0]) ] %set up a matrix of each joint point for visual representation
- finalArm = [P ,armFunction_midJoint(q, [0;0;0]) , armFunction(q,[0;0;0]); ]
+  X = [init(1),t(1)];
+  Y = [init(2),t(2)];
+  Z = [init(3),t(3)];
+  
+  plot3(M(:,1),M(:,2),M(:,3), 'c','linewidth',3,'DisplayName',sprintf('path of arm') );
+  hold on;
+  plot3(X,Y,Z, 'r','linewidth',3,'DisplayName',sprintf('Ideal Linear Path') );
+  xlim([-2 2]);
+  ylim([-2 2]);
+  zlim([-2 2]);
+  xlabel('X', 'fontsize', 14, 'fontweight', 'bold');
+  ylabel('Y', 'fontsize', 14, 'fontweight', 'bold');
+  zlabel('Z', 'fontsize', 14, 'fontweight', 'bold');
+  lgd = legend('show', 'location', 'northwest'); 
+
+  for a = 1:5
+    Arm = [P ,armFunction_midJoint(Q(:,a), [0;0;0]) , armFunction(Q(:,a),[0;0;0])];
+    plot3(Arm(1,:),Arm(2,:),Arm(3,:), 'bk', 'linewidth',2);
+  end
 
 %csvwrite('stuff.csv', M);
 % Plots the path of the end effector
-hold on;
-plot3(M(:,1),M(:,2),M(:,3), 'c','linewidth',3,'DisplayName',sprintf('path of arm') );
-plot3(initArm(1,:),initArm(2,:),initArm(3,:), 'g', 'linewidth',3,'DisplayName',sprintf('initial arm') );
-plot3(finalArm(1,:),finalArm(2,:),finalArm(3,:), 'bk', 'linewidth',3,'DisplayName',sprintf('final arm') );
-
-xlim([-2 2]);
-ylim([-2 2]);
-zlim([-2 2]);
-xlabel('X', 'fontsize', 14, 'fontweight', 'bold');
-ylabel('Y', 'fontsize', 14, 'fontweight', 'bold');
-zlabel('Z', 'fontsize', 14, 'fontweight', 'bold');
-lgd = legend('show', 'location', 'northwest'); 
 hold off;
 
 finalQ = q;

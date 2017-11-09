@@ -4,7 +4,7 @@ q = q*(pi/180);
 t = [1.5;0.8;-0.3];
 
 Q = [q];    %list of all angles for each target point starting at the initial position
-n=12;
+n=40;
 Points = sectionPath(t,q,n);
 
 
