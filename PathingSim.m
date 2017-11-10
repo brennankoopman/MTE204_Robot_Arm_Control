@@ -13,8 +13,8 @@ arcIter = number of points you take on the arc
 q = [0;-160;-45];
 t = [1.5;0.8;-0.3];
 Jerr = 0.001;     %a jacobian absiolute error of 1 mm
-Emax = 1;      %absolute worst positional error of 1 cm
-exTime = 15;       %worst case computation time in seconds
+Emax = 0.1;      %absolute worst positional error of 1 cm
+exTime = 20;       %worst case computation time in seconds
 arcIter = 4;
 q = q*(pi/180);     %convert q to radians
 P = [0;0;0];
@@ -25,11 +25,11 @@ P = [0;0;0];
 %q = [0;90;0];
 %t = [0;2;0];
 %Jerr = 0.001;     %a jacobian absiolute error of 1 mm
-%Emax = 6;      %absolute worst positional error of 1 cm
+%Emax = 0.9;      %absolute worst positional error of 1 cm
 %exTime = 400;       %worst case computation time in seconds
 %arcIter = 100;
 %q = q*(pi/180);     %convert q to radians
-%-------------------------------------------
+%%-------------------------------------------
 
 %Based on the report n has a max value, being the greater value between
 %extime = 0.0111n
@@ -55,7 +55,7 @@ else
   return; %cannot calculate with the given specifications!!!
 end
 
-time = 1/(arcIter^2*n^2);    %scale the printing time to make the sim look nice
+time = 1/(4*arcIter^2*n^2);    %scale the printing time to make the sim look nice
 
 Q = [q,zeros(3,n)];    %list of all angles for each target point starting at the initial position
 Points = sectionPath(t,q,n); %points is a 3 x n+1 matrix, it will track the ideal path of the arm 
@@ -111,14 +111,13 @@ Points = sectionPath(t,q,n); %points is a 3 x n+1 matrix, it will track the idea
     N = ceil(c/arcIter);
     
     %print the ideal path up to each current target point with points and lines
-    plot3(Points(1,[1:N]),Points(2,[1:N]),Points(3,[1:N]), 'g','linewidth',3,'DisplayName',sprintf('Ideal Path with Target Points'),'marker','o' );
+    plot3(Points(1,[1:N]),Points(2,[1:N]),Points(3,[1:N]), 'g','linewidth',1,'DisplayName',sprintf('Ideal Path with Target Points'),'marker','o','markersize',4, 'MarkerEdgeColor',[0 0.7 0]);
     %set up the calibration of each plot
-    hold on;
     hold on;
     xlim([-2 2]);
     ylim([-2 2]);
     zlim([-2 2]);
-    view(-180+0.5*c,20);
+    view(-100,15);
     xlabel('X', 'fontsize', 14, 'fontweight', 'bold');
     ylabel('Y', 'fontsize', 14, 'fontweight', 'bold');
     zlabel('Z', 'fontsize', 14, 'fontweight', 'bold');
@@ -128,7 +127,7 @@ Points = sectionPath(t,q,n); %points is a 3 x n+1 matrix, it will track the idea
     plot3(Arm(1,:),Arm(2,:),Arm(3,:), 'bk', 'linewidth',2,'marker','o');
     
     %plot the curved path of the end effecor up to the current point
-    plot3(truePath_end(1,[1:c]),truePath_end(2,[1:c]),truePath_end(3,[1:c]),'r', 'linewidth',2,'DisplayName',sprintf('True Path')) 
+    plot3(truePath_end(1,[1:c]),truePath_end(2,[1:c]),truePath_end(3,[1:c]),'r', 'linewidth',1,'DisplayName',sprintf('True Path')) 
     %maybe have an output legend????
     lgd = legend('show', 'location', 'northwest');
     pause(time); %time between each frame, scaled by the number of iterations on the arc as well as n
