@@ -11,7 +11,7 @@ for h = 1:NumberOfTrials
    count =0;
   for n = [1,10:10:200] %the numer of subintervals broken
     count = count+1;
-    exTime(1,count) = exTime(1,count) + simOutput(q, t, Jerr, n); 
+    exTime(1,count) = exTime(1,count) + timeOutputTest(q, t, Jerr, n); 
     
   end
 

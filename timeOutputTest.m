@@ -1,12 +1,14 @@
 
 %{
+%this times the numerical method verses n subintervals, the calculations in this function are the major ones a real 
+%time system would need to operate with our mething method
 q - the initial position in angles of deg
-t - the target position in cartesian coords, col vector
+t - the target position in cartesian coords, col vesctor
 Jerr - the end case error on the Jacobian transpose method
 n = number of steps you break the linear movement into
 
 %}
-function time = simOutput(q, t, Jerr, n) 
+function time = timeOutputTest(q, t, Jerr, n) 
 tic                    %this records the innitial time stamp for the time trials
 q = q*(pi/180);
 Q = [q,zeros(3,n)];    %list of all angles for each target point starting at the initial position
