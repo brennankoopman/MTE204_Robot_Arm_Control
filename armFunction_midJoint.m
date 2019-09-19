@@ -1,6 +1,6 @@
 
 %this function calculates the postion of the midjoint with the inputs of
-%q, which is the joints angles of the arm
+%q, which is the joint angles of the arm
 %P is the reference point of the arm in 3D space, typically (0,0,0)
 
 function [smid] = armFunction_midJoint (q, P)
