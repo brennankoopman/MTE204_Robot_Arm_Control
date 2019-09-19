@@ -2,7 +2,7 @@
 ---------------------------------------------
 This our a numerical methods project, where we were tasked with implementing and analyzing a numerical method of our choice. We chose to test the Jacobian transpose method, which a method used in the inverse kinematics of robotic arms. This simulation seeks to analyze this method on a virtual 3-DOF arm called Margaret, with the goal of setting up linear paths for Margaret's end effector to follow.
 
-![](./VisualExamples/curved\ pathing.gif)
+![](./VisualExamples/christmas.gif)
 
 
 
