@@ -3,7 +3,7 @@ q = [10;0;160];
 t = [0.3;-1.3;1.5];
 Jerr = 0.001; %testing a Jacobian endcase error
 
-exTime = zeros(1,51);
+exTime = zeros(1,21);
 NumberOfTrials = 3;
 
 for h = 1:NumberOfTrials 
@@ -11,7 +11,7 @@ for h = 1:NumberOfTrials
    count =0;
   for n = [1,10:10:200] %the numer of subintervals broken
     count = count+1;
-    exTime(1,count) = exTime(1,count) + simOutput(q, t, Jerr, n); 
+    exTime(1,count) = exTime(1,count) + timeOutputTest(q, t, Jerr, n); 
     
   end
 
